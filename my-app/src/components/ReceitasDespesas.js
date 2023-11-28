@@ -7,14 +7,21 @@ function ReceitasDespesas({ dados, onDelete }) {
         <div key={index}>
           <ul className="flex justify-around w-full items-center">
             <div>
-              {Object.entries(elemento).map(([key, value]) => (
-                <li key={key}>
-                  <strong>{key}:</strong> {value}
-                </li>
-              ))}
+              <li>
+                <strong>Nome:</strong> {elemento.Nome}
+              </li>
+              <li>
+                <strong>Valor:</strong> {elemento.Valor}
+              </li>
+              <li>
+                <strong>Tipo:</strong> {elemento.Tipo}
+              </li>
+              <li>
+                <strong>Pagamento:</strong> {elemento.Pagamento}
+              </li>
             </div>
             <button
-              onClick={() => onDelete(index)}
+              onClick={() => onDelete(index, elemento.Tipo, elemento.Valor)}
               className="bg-red-600 font-semibold text-white p-2 h-fit rounded-lg"
             >
               Delete

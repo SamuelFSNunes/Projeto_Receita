@@ -6,16 +6,17 @@ function Cadastro() {
   const [saldo, setSaldo] = useState(0);
 
   const handleDelete = (index, tipo, valor) => {
-    // Lógica para excluir o elemento com o índice fornecido
-    const novosDados = [...dados];
-    novosDados.splice(index, 1);
+    // Lógica para excluir o elemento com o índice fornecido e o tipo correto
+    const novosDados = dados.filter(
+      (elemento, i) => i !== index || elemento.Tipo !== tipo
+    );
     setDados(novosDados);
 
-    // Atualizar o saldo com base no tipo (receita/despesa) e valor
+    // Atualizar o saldo com base no tipo (receita/despesa) e valor do elemento removido
     if (tipo === "receita") {
-      setSaldo((prevSaldo) => prevSaldo - parseFloat(valor));
+      setSaldo((prevSaldo) => prevSaldo - valor);
     } else if (tipo === "despesas") {
-      setSaldo((prevSaldo) => prevSaldo + parseFloat(valor));
+      setSaldo((prevSaldo) => prevSaldo + valor);
     }
   };
 
@@ -111,7 +112,11 @@ function Cadastro() {
         </div>
       </div>
       <div className="absolute text-xl font-bold mt-5 bottom-10">
-        Saldo em Carteira: R$ {saldo.toFixed(2)}
+        Saldo em Carteira: R${" "}
+        {saldo.toLocaleString("pt-BR", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
       </div>
     </div>
   );
